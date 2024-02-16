@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="LolPlayButtonMaui.Component.Themes.ToggleButton"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:alohakit="clr-namespace:AlohaKit.Animations;assembly=AlohaKit.Animations"
+    xmlns:component="clr-namespace:LolPlayButtonMaui.Component"
+    xmlns:customalohakit="clr-namespace:LolPlayButtonMaui.Animations"
+    xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+    xmlns:local="clr-namespace:LolPlayButtonMaui.Component.Themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <LinearGradientBrush x:Key="ArrowStroke" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Offset="0" Color="#CC3FE7FF" />
+        <GradientStop Offset="0.5" Color="#CC006D7D" />
+        <GradientStop Offset="1" Color="#CC0493A7" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ArrowStrokeOver" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Offset="0" Color="#FFAFF5FF" />
+        <GradientStop Offset="0.5" Color="#FF46E6FF" />
+        <GradientStop Offset="1" Color="#FF00ADD4" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ArrowFillOver" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Offset="0" Color="#FF1D3B4A" />
+        <GradientStop Offset="1" Color="#FF082734" />
+    </LinearGradientBrush>
+
+    <Style x:Key="GoldLine" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="#00070E" />
+        <Setter Property="Stroke" Value="#34291E" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Margin" Value="10,0, 0, 0" />
+    </Style>
+
+    <Style x:Key="GreenLine" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="#1E2328" />
+        <Setter Property="Stroke" Value="#09343D" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Margin" Value="50,4, 4, 4" />
+    </Style>
+
+    <Style x:Key="Emblem" TargetType="{x:Type Image}">
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Source" Value="logo.png" />
+        <Setter Property="Height" Value="38" />
+    </Style>
+
+    <Style x:Key="Play" TargetType="{x:Type Label}">
+        <Setter Property="Text" Value="PLAY" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Margin" Value="30,0, 0, 0" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="TextColor" Value="#FFFFFF" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="Stop" TargetType="{x:Type Label}">
+        <Setter Property="Text" Value="STOP" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Margin" Value="30, 0, 0, 100" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="TextColor" Value="#FFFFFF" />
+        <Setter Property="FontAttributes" Value="Bold" />
+
+    </Style>
+
+    <Style x:Key="Arrow" TargetType="{x:Type Path}">
+        <Setter Property="Fill" Value="#1E2328" />
+        <Setter Property="Stroke" Value="{StaticResource ArrowStroke}" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Data" Value="M 0,0 L 103,0 L 118,14 L 103,28 L 0,28 C 10,14 0,0 0,0 Z" />
+        <Setter Property="Margin" Value="40, 5, 4, -5" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Radius="5" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type component:ToggleButton}">
+        <Setter Property="HeightRequest" Value="38" />
+        <Setter Property="WidthRequest" Value="165" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ControlTemplate">
+            <ControlTemplate>
+                <Grid Background="{TemplateBinding Background}" InputTransparent="True">
+                    <Border Style="{StaticResource GoldLine}" />
+                    <Image Style="{StaticResource Emblem}" />
+                    <Border Style="{StaticResource GreenLine}" />
+                    <Path x:Name="path" Style="{StaticResource Arrow}">
+                        <Path.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsToggled, Source={RelativeSource Mode=TemplatedParent}}"
+                                TargetType="{x:Type Path}"
+                                Value="True">
+                                <Setter Property="Fill" Value="#1E2328" />
+                                <Setter Property="Stroke" Value="#5C5B57" />
+
+                            </DataTrigger>
+                        </Path.Triggers>
+                    </Path>
+                    <Grid>
+                        <Grid.Clip>
+                            <RectangleGeometry Rect="0,5,165,28" />
+                        </Grid.Clip>
+                        <Label x:Name="play" Style="{StaticResource Play}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsToggled, Source={RelativeSource Mode=TemplatedParent}}"
+                                    TargetType="{x:Type Label}"
+                                    Value="True">
+                                    <Setter Property="TextColor" Value="#3C3C41" />
+                                    <DataTrigger.EnterActions>
+                                        <customalohakit:AnimateThickness
+                                            TargetProperty="Label.Margin"
+                                            To="30,100,0,0"
+                                            Duration="500" />
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <customalohakit:AnimateThickness
+                                            TargetProperty="Label.Margin"
+                                            To="30, 0, 0,0"
+                                            Duration="500" />
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label x:Name="stop" Style="{StaticResource Stop}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsToggled, Source={RelativeSource Mode=TemplatedParent}}"
+                                    TargetType="{x:Type Label}"
+                                    Value="True">
+                                    <Setter Property="TextColor" Value="#3C3C41" />
+                                    <DataTrigger.EnterActions>
+                                        <customalohakit:AnimateThickness
+                                            TargetProperty="Label.Margin"
+                                            To="30,0,0,0"
+                                            Duration="500" />
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <customalohakit:AnimateThickness
+                                            TargetProperty="Label.Margin"
+                                            To="30, 0, 0, 100"
+                                            Duration="500" />
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</ResourceDictionary>

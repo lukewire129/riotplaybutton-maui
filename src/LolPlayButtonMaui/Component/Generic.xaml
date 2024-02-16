@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="LolPlayButtonMaui.Component.Generic"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+    xmlns:local="clr-namespace:LolPlayButtonMaui.Component.Themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:themes="clr-namespace:LolPlayButtonMaui.Component.Themes"
+    mc:Ignorable="d">
+    <ResourceDictionary.MergedDictionaries>
+        <themes:ToggleButton />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
