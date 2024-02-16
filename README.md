@@ -1,6 +1,6 @@
 ﻿# riotplaybutton-maui
 
-## Motivation 
+### Motivation 
 - ([Here](https://github.com/vickyqu115/lol-playbutton))
-## Series
+### Series
 - ([Avalonia](https://github.com/lukewire129/riotplaybutton-avaloniaui))
